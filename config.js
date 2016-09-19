@@ -15,11 +15,18 @@
   } else {
     var port = 8086;
   }
-  
+
+  if (process.env.INFLUXDB_VERSION !== undefined) {
+    var version = parseFloat(process.env.INFLUXDB_VERSION);
+  } else {
+    var version = 0.9;
+  }
+
   return {
     influxdb: {
       host: host,
       port: port,
+      version: version,
       database: process.env.INFLUXDB_DATABASE || "site_dev",
       username: process.env.INFLUXDB_USERNAME || "root",
       password: process.env.INFLUXDB_PASSWORD || "root",
